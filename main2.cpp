@@ -1,7 +1,7 @@
 #include "renderer.h"
 #include "domain.h"
 #include <vector>
-#include <windows.h>
+#include <unistd.h>
 #include "PerspectiveRenderer.h"
 int main(){
     std::vector<float> ls{0,1,-1};
@@ -23,6 +23,6 @@ int main(){
     {
         r.display();
         t.rotate_x(10*3.14/180);
-        t2.rotate_x(10*3.14/180);
+        t2.rotate_x(-10*3.14/180);
     }
 }

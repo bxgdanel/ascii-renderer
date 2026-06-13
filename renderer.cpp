@@ -1,5 +1,5 @@
 #include "renderer.h"
-#include <windows.h>
+#include <unistd.h>
 #include <stdio.h>
 
 Renderer::Renderer(int w,int h,vector<float> ls){
@@ -27,42 +27,40 @@ void Renderer::ResetDepthBuffer(){
             zbuf[x][y]=-1e19;
 }
 void Renderer::setCursorPosition(int x,int y){
-    static const HANDLE hout = GetStdHandle(STD_OUTPUT_HANDLE);
-
+    printf("\033[%d;%dH",y+1,x+1);    
     fflush(stdout);
-
-    COORD coord = {(SHORT)x,(SHORT)y};
-    SetConsoleCursorPosition(hout,coord);
 }
-void Renderer::render(const Surface* surface){
+void Renderer::render(){
     for(int x = 0; x < W_size; x++) {
         for(int y = 0; y < H_size; y++) {
             a[x][y] = 0;
         }
     }
     float scale  = 1.5;
-    for(int i =0;i<surface->size;i++)
-    {
-        float aspect_ratio_comp = W_size/H_size;
-        int screen_x = surface->points[i][0]*scale*aspect_ratio_comp + W_size/2;
-        int screen_y = surface->points[i][1]*scale + H_size/2;
-        
-        if(screen_x<W_size && screen_x>=0 && screen_y<H_size && screen_y >=0){
-            if(surface->points[i][2]>zbuf[screen_x][screen_y]){
-                    zbuf[screen_x][screen_y] = surface->points[i][2];
-                    float brightness_value = surface->normals[i][0]*light_source[0]+ surface->normals[i][1]*light_source[1] + surface->normals[i][2]*light_source[2];
-                    brightness_value  = brightness_value > 0?brightness_value:0;
-                    a[screen_x][screen_y]=brightness_value*(printvals_len-1);
+    int size_total = 0;
+    for(auto s:shapes)
+        size_total+=s->size;
+    for(auto s:shapes)
+        for(int i =0;i<s->size;i++)
+        {
+            float aspect_ratio_comp = W_size/H_size;
+            int screen_x = s->points[i][0]*scale*aspect_ratio_comp + W_size/2;
+            int screen_y = s->points[i][1]*scale + H_size/2;
+            
+            if(screen_x<W_size && screen_x>=0 && screen_y<H_size && screen_y >=0){
+                if(s->points[i][2]>zbuf[screen_x][screen_y]){
+                        zbuf[screen_x][screen_y] = s->points[i][2];
+                        float brightness_value = s->normals[i][0]*light_source[0]+ s->normals[i][1]*light_source[1] + s->normals[i][2]*light_source[2];
+                        brightness_value  = brightness_value > 0?brightness_value:0;
+                        a[screen_x][screen_y]=brightness_value*(printvals_len-1);
+                }
             }
-        }
     }
 }
 void Renderer::display(){
     setCursorPosition(0,0);
     ResetDepthBuffer();
-    
-    for(auto s : shapes)
-        render(s);
+    render();
     print_buffer();
     
 }

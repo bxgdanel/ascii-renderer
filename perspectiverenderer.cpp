@@ -1,29 +1,30 @@
 #include "PerspectiveRenderer.h"
 
-void PerspectiveRenderer::render(const Surface* surface){
+void PerspectiveRenderer::render(){
 for(int x = 0; x < W_size; x++) {
         for(int y = 0; y < H_size; y++) {
             a[x][y] = 0;
         }
     }
     //float scale  = 1.5;
-    for(int i =0;i<surface->size;i++)
-    {
-        if(surface->points[i][2]<=0.1f) continue;
+    for(auto s:shapes)
+        for(int i =0;i<s->size;i++)
+        {
+            if(s->points[i][2]<=0.1f) continue;
 
-        float aspect_ratio_comp = W_size/H_size;
-        int screen_x = surface->points[i][0]*fov*aspect_ratio_comp/surface->points[i][2]+ W_size/2;
-        int screen_y = surface->points[i][1]*fov/surface->points[i][2]+ H_size/2;
-        
-        if(screen_x<W_size && screen_x>=0 && screen_y<H_size && screen_y >=0){
-            if(surface->points[i][2]<zbuf[screen_x][screen_y]){
-                    zbuf[screen_x][screen_y] = surface->points[i][2];
-                    float brightness_value = surface->normals[i][0]*light_source[0]+ surface->normals[i][1]*light_source[1] + surface->normals[i][2]*light_source[2];
-                    brightness_value  = brightness_value > 0?brightness_value:0;
-                    a[screen_x][screen_y]=brightness_value*(printvals_len-1);
+            float aspect_ratio_comp = W_size/H_size;
+            int screen_x = s->points[i][0]*fov*aspect_ratio_comp/s->points[i][2]+ W_size/2;
+            int screen_y = s->points[i][1]*fov/s->points[i][2]+ H_size/2;
+            
+            if(screen_x<W_size && screen_x>=0 && screen_y<H_size && screen_y >=0){
+                if(s->points[i][2]<zbuf[screen_x][screen_y]){
+                        zbuf[screen_x][screen_y] = s->points[i][2];
+                        float brightness_value = s->normals[i][0]*light_source[0]+ s->normals[i][1]*light_source[1] + s->normals[i][2]*light_source[2];
+                        brightness_value  = brightness_value > 0?brightness_value:0;
+                        a[screen_x][screen_y]=brightness_value*(printvals_len-1);
+                }
             }
         }
-    }
 }
 void PerspectiveRenderer::ResetDepthBuffer(){
     for(int x=0;x<W_size;x++)

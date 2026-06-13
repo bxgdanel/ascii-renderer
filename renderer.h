@@ -15,7 +15,7 @@ class Renderer{
     void print_buffer();
     virtual void ResetDepthBuffer();
     void setCursorPosition(int x,int y);
-    virtual void render(const Surface* surface);
+    virtual void render();
     public:
     Renderer(int width,int height,vector<float> light_source);
     Renderer(){}
