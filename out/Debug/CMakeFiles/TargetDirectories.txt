@@ -1,0 +1,3 @@
+/media/bogdanel/uhhhhh/ascii-renderer/out/Debug/CMakeFiles/ascii_r.dir
+/media/bogdanel/uhhhhh/ascii-renderer/out/Debug/CMakeFiles/edit_cache.dir
+/media/bogdanel/uhhhhh/ascii-renderer/out/Debug/CMakeFiles/rebuild_cache.dir
