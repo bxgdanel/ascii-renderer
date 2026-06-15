@@ -22,5 +22,11 @@
   "command": "/usr/bin/c++   -g -std=gnu++17 -o CMakeFiles/ascii_r.dir/renderer.cpp.o -c /media/bogdanel/uhhhhh/ascii-renderer/renderer.cpp",
   "file": "/media/bogdanel/uhhhhh/ascii-renderer/renderer.cpp",
   "output": "CMakeFiles/ascii_r.dir/renderer.cpp.o"
+},
+{
+  "directory": "/media/bogdanel/uhhhhh/ascii-renderer/out/Debug",
+  "command": "/usr/bin/c++   -g -std=gnu++17 -o CMakeFiles/ascii_r.dir/Camera.cpp.o -c /media/bogdanel/uhhhhh/ascii-renderer/Camera.cpp",
+  "file": "/media/bogdanel/uhhhhh/ascii-renderer/Camera.cpp",
+  "output": "CMakeFiles/ascii_r.dir/Camera.cpp.o"
 }
 ]

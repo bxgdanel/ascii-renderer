@@ -1,7 +1,6 @@
-CMakeFiles/ascii_r.dir/domain.cpp.o: \
- /media/bogdanel/uhhhhh/ascii-renderer/domain.cpp \
+CMakeFiles/ascii_r.dir/Camera.cpp.o: \
+ /media/bogdanel/uhhhhh/ascii-renderer/Camera.cpp \
  /usr/include/stdc-predef.h \
- /media/bogdanel/uhhhhh/ascii-renderer/domain.h \
  /media/bogdanel/uhhhhh/ascii-renderer/Camera.h \
  /usr/include/c++/13/vector /usr/include/c++/13/bits/requires_hosted.h \
  /usr/include/x86_64-linux-gnu/c++/13/bits/c++config.h \

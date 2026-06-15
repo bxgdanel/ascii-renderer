@@ -129,6 +129,30 @@ ascii_r/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/ascii_r.dir/build.make CMakeFiles/ascii_r.dir/build
 .PHONY : ascii_r/fast
 
+Camera.o: Camera.cpp.o
+.PHONY : Camera.o
+
+# target to build an object file
+Camera.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ascii_r.dir/build.make CMakeFiles/ascii_r.dir/Camera.cpp.o
+.PHONY : Camera.cpp.o
+
+Camera.i: Camera.cpp.i
+.PHONY : Camera.i
+
+# target to preprocess a source file
+Camera.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ascii_r.dir/build.make CMakeFiles/ascii_r.dir/Camera.cpp.i
+.PHONY : Camera.cpp.i
+
+Camera.s: Camera.cpp.s
+.PHONY : Camera.s
+
+# target to generate assembly for a file
+Camera.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ascii_r.dir/build.make CMakeFiles/ascii_r.dir/Camera.cpp.s
+.PHONY : Camera.cpp.s
+
 domain.o: domain.cpp.o
 .PHONY : domain.o
 
@@ -234,6 +258,9 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... ascii_r"
+	@echo "... Camera.o"
+	@echo "... Camera.i"
+	@echo "... Camera.s"
 	@echo "... domain.o"
 	@echo "... domain.i"
 	@echo "... domain.s"

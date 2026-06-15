@@ -1,4 +1,6 @@
 file(REMOVE_RECURSE
+  "CMakeFiles/ascii_r.dir/Camera.cpp.o"
+  "CMakeFiles/ascii_r.dir/Camera.cpp.o.d"
   "CMakeFiles/ascii_r.dir/domain.cpp.o"
   "CMakeFiles/ascii_r.dir/domain.cpp.o.d"
   "CMakeFiles/ascii_r.dir/main2.cpp.o"
