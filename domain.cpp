@@ -106,9 +106,25 @@ void Surface::translate(float x, float y, float z) {
   this->center[0] += x, this->center[1] += y, this->center[2] += z;
 }
 bool Surface::intersect(Ray &ray, float &t, vector<float> &norm) const {
+
+  float oc_b[3];
+  oc_b[0] = (ray.origin[0] - center[0]);
+  oc_b[1] = (ray.origin[1] - center[1]);
+  oc_b[2] = (ray.origin[2] - center[2]);
+  
+  float b_b = 2.0f * (oc_b[0] * ray.direction[0] + oc_b[1] * ray.direction[1] + oc_b[2] * ray.direction[2]);
+  float bounding_radius = 10.0f; // Raza maximă a Torusului tău (6 + 3 + marjă)
+  float c_b = (oc_b[0] * oc_b[0] + oc_b[1] * oc_b[1] + oc_b[2] * oc_b[2]) - bounding_radius * bounding_radius;
+  
+  float disc_b = b_b * b_b - 4.0f * c_b;
+  
+  if (disc_b < 0) {
+      return false; 
+  }
+
   bool hit = false;
   t = 1e9;
-  float radius = .4f;
+  float radius = 1.0f;
   if (norm.size() < 3)
     norm.resize(3);
   for (int i = 0; i < points.size(); i++) {
@@ -123,12 +139,12 @@ bool Surface::intersect(Ray &ray, float &t, vector<float> &norm) const {
     if (disc >= 0) {
       float t1 = (-b - sqrt(disc)) / 2.0f;
 
-      if (t1 > 0.001f && t1 < t)
+      if (t1 > 0.001f && t1 < t){
         t = t1;
-      if (i < normals.size() && !normals[i].empty())
+        if (i < normals.size() && !normals[i].empty())
         norm = normals[i];
-
-      hit = true;
+        hit = true;
+      }
     }
   }
   return hit;
