@@ -3,6 +3,7 @@
 #include "domain.h"
 #include <string>
 #include <vector>
+#include <tuple>
 using std::vector;
 class Renderer {
 protected:
@@ -10,7 +11,7 @@ protected:
   vector<vector<int>> a;
   vector<vector<float>> zbuf;
   vector<const Surface *> shapes;
-  vector<float> light_source;
+  float light_source[3];
   Camera camera;
   const std::string printvals = " .,-~:;=!*#$%@";
   const int printvals_len = 14;
@@ -20,7 +21,7 @@ protected:
   virtual void render();
 
 public:
-  Renderer(int width, int height, vector<float> light_source, Camera camera);
+  Renderer(int width, int height, float light_source[3], Camera camera);
   Renderer() {}
   void display();
   void add_shape(const Surface *s);

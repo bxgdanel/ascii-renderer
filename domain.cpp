@@ -1,151 +1,55 @@
 #include "domain.h"
 #include <vector>
-void Torus::generate(vector<float> dim) {
-  if (dim.size() != 2)
-    // throw std::exception("Torus generator needs 2 dimensions: R, r");
-    return;
-  float R = dim[0], r = dim[1];
-  for (float theta = 0; theta < 6.28; theta += 0.1)
-    for (float phi = 0; phi < 6.28; phi += 0.1) {
-      vector<float> tmp;
-      vector<float> tmp_norm;
-      tmp.push_back((R + r * cos(theta)) * cos(phi)); // x conform ec param
-      tmp.push_back((R + r * cos(theta)) * sin(phi)); // y conform ec param
-      tmp.push_back(r * sin(theta));
+using namespace std;
+vector<float> Surface::get_normal(vector<float> p) const {
+  float eps = 0.001f;
+    vector<float> n = {
+        get_distance({p[0] + eps, p[1], p[2]}) - get_distance({p[0] - eps, p[1], p[2]}),
+        get_distance({p[0], p[1] + eps, p[2]}) - get_distance({p[0], p[1] - eps, p[2]}),
+        get_distance({p[0], p[1], p[2] + eps}) - get_distance({p[0], p[1], p[2] - eps})
+    };
+    float len = sqrt(n[0]*n[0] + n[1]*n[1] + n[2]*n[2]);
+    if (len > 0) { n[0]/=len; n[1]/=len; n[2]/=len; }
+    return n;
+}
+bool Surface::intersect(Ray &ray, float &t, float norm[]) const {
+  float t_curent = 0.0f;
+  const int MAX_STEPS = 80;
+  const float MAX_DIST = 100.0f;
+  const float SURFACE_DIST = 0.01f;
 
-      tmp_norm.push_back(cos(theta) * cos(phi));
-      tmp_norm.push_back(cos(theta) * sin(phi));
-      tmp_norm.push_back(sin(theta));
-
-      points.push_back(tmp);
-      normals.push_back(tmp_norm);
+  for(int i =0; i<MAX_STEPS; i++){
+    vector<float> p ={ 
+      ray.origin[0] + ray.direction[0] * t_curent,
+      ray.origin[1] + ray.direction[1] * t_curent,
+      ray.origin[2] + ray.direction[2] * t_curent
+    };
+    float d = get_distance(p);
+    if ( d< SURFACE_DIST){
+      t = t_curent;
+      vector<float> normal_tmp = get_normal(p);
+      copy(normal_tmp.begin(),normal_tmp.end(),norm);
+      return true;
     }
-  size = points.size();
+    if ( t_curent > MAX_DIST) break;
+    t_curent += d;
+  }
+  return false;
 }
-void Surface::rotate_x(float unghi) {
-  float RotationMatrix[3][3] = {{1, 0, 0},
-                                {0, (float)cos(unghi), -(float)sin(unghi)},
-                                {0, (float)sin(unghi), (float)cos(unghi)}};
-  vector<vector<float>> points_cpy;
-  vector<vector<float>> normals_cpy;
-  float xc, yc, zc;
-  xc = center[0];
-  yc = center[1];
-  zc = center[2];
-  this->translate(-xc, -yc, -zc);
-  for (int i = 0; i < points.size(); i++) {
-    vector<float> tmp;
-    tmp.push_back(RotationMatrix[0][0] * this->points[i][0] +
-                  RotationMatrix[0][1] * this->points[i][1] +
-                  RotationMatrix[0][2] * this->points[i][2]);
-    tmp.push_back(RotationMatrix[1][0] * this->points[i][0] +
-                  RotationMatrix[1][1] * this->points[i][1] +
-                  RotationMatrix[1][2] * this->points[i][2]);
-    tmp.push_back(RotationMatrix[2][0] * this->points[i][0] +
-                  RotationMatrix[2][1] * this->points[i][1] +
-                  RotationMatrix[2][2] * this->points[i][2]);
-    points_cpy.push_back(tmp);
+float Torus::get_distance(vector<float> p) const {
+    float px = p[0] - center[0];
+    float py = p[1] - center[1];
+    float pz = p[2] - center[2];
 
-    vector<float> tmp_norm;
-    tmp_norm.push_back(RotationMatrix[0][0] * this->normals[i][0] +
-                       RotationMatrix[0][1] * this->normals[i][1] +
-                       RotationMatrix[0][2] * this->normals[i][2]);
-    tmp_norm.push_back(RotationMatrix[1][0] * this->normals[i][0] +
-                       RotationMatrix[1][1] * this->normals[i][1] +
-                       RotationMatrix[1][2] * this->normals[i][2]);
-    tmp_norm.push_back(RotationMatrix[2][0] * this->normals[i][0] +
-                       RotationMatrix[2][1] * this->normals[i][1] +
-                       RotationMatrix[2][2] * this->normals[i][2]);
-    normals_cpy.push_back(tmp_norm);
-  }
+    float py_rot = py * cos(angle_x) + pz * sin(angle_x);
+    float pz_rot = -py * sin(angle_x) + pz * cos(angle_x);
+    py = py_rot; pz = pz_rot;
 
-  points = points_cpy;
-  normals = normals_cpy;
-  this->translate(xc, yc, zc);
-}
-void Surface::rotate_z(float unghi) {
-  float RotationMatrix[3][3] = {{(float)cos(unghi), -(float)sin(unghi), 0},
-                                {(float)sin(unghi), (float)cos(unghi), 0},
-                                {0, 0, 1}};
-  vector<vector<float>> points_cpy;
-  vector<vector<float>> normals_cpy;
-  for (int i = 0; i < points.size(); i++) {
-    vector<float> tmp;
-    tmp.push_back(RotationMatrix[0][0] * this->points[i][0] +
-                  RotationMatrix[0][1] * this->points[i][1] +
-                  RotationMatrix[0][2] * this->points[i][2]);
-    tmp.push_back(RotationMatrix[1][0] * this->points[i][0] +
-                  RotationMatrix[1][1] * this->points[i][1] +
-                  RotationMatrix[1][2] * this->points[i][2]);
-    tmp.push_back(RotationMatrix[2][0] * this->points[i][0] +
-                  RotationMatrix[2][1] * this->points[i][1] +
-                  RotationMatrix[2][2] * this->points[i][2]);
-    points_cpy.push_back(tmp);
+    float px_rot = px * cos(angle_z) + py * sin(angle_z);
+    float py_rot2 = -px * sin(angle_z) + py * cos(angle_z);
+    px = px_rot; py = py_rot2;
 
-    vector<float> tmp_norm;
-    tmp_norm.push_back(RotationMatrix[0][0] * this->normals[i][0] +
-                       RotationMatrix[0][1] * this->normals[i][1] +
-                       RotationMatrix[0][2] * this->normals[i][2]);
-    tmp_norm.push_back(RotationMatrix[1][0] * this->normals[i][0] +
-                       RotationMatrix[1][1] * this->normals[i][1] +
-                       RotationMatrix[1][2] * this->normals[i][2]);
-    tmp_norm.push_back(RotationMatrix[2][0] * this->normals[i][0] +
-                       RotationMatrix[2][1] * this->normals[i][1] +
-                       RotationMatrix[2][2] * this->normals[i][2]);
-    normals_cpy.push_back(tmp_norm);
-  }
-  points = points_cpy;
-  normals = normals_cpy;
-}
-void Surface::translate(float x, float y, float z) {
-  for (int i = 0; i < points.size(); i++) {
-    this->points[i][0] += x;
-    this->points[i][1] += y;
-    this->points[i][2] += z;
-  }
-  this->center[0] += x, this->center[1] += y, this->center[2] += z;
-}
-bool Surface::intersect(Ray &ray, float &t, vector<float> &norm) const {
-
-  float oc_b[3];
-  oc_b[0] = (ray.origin[0] - center[0]);
-  oc_b[1] = (ray.origin[1] - center[1]);
-  oc_b[2] = (ray.origin[2] - center[2]);
-  
-  float b_b = 2.0f * (oc_b[0] * ray.direction[0] + oc_b[1] * ray.direction[1] + oc_b[2] * ray.direction[2]);
-  float bounding_radius = 10.0f; // Raza maximă a Torusului tău (6 + 3 + marjă)
-  float c_b = (oc_b[0] * oc_b[0] + oc_b[1] * oc_b[1] + oc_b[2] * oc_b[2]) - bounding_radius * bounding_radius;
-  
-  float disc_b = b_b * b_b - 4.0f * c_b;
-  
-  if (disc_b < 0) {
-      return false; 
-  }
-
-  bool hit = false;
-  t = 1e9;
-  float radius = 1.0f;
-  if (norm.size() < 3)
-    norm.resize(3);
-  for (int i = 0; i < points.size(); i++) {
-    float oc[3];
-    oc[0] = (ray.origin[0] - points[i][0]);
-    oc[1] = (ray.origin[1] - points[i][1]);
-    oc[2] = (ray.origin[2] - points[i][2]);
-    float b = 2.0f * (oc[0] * ray.direction[0] + oc[1] * ray.direction[1] +
-                      oc[2] * ray.direction[2]);
-    float c = (oc[0] * oc[0] + oc[1] * oc[1] + oc[2] * oc[2]) - radius * radius;
-    float disc = b * b - 4.0f * c;
-    if (disc >= 0) {
-      float t1 = (-b - sqrt(disc)) / 2.0f;
-
-      if (t1 > 0.001f && t1 < t){
-        t = t1;
-        if (i < normals.size() && !normals[i].empty())
-        norm = normals[i];
-        hit = true;
-      }
-    }
-  }
-  return hit;
+    float qx = sqrt(px*px + py*py) - R;
+    float qy = pz;
+    return sqrt(qx*qx + qy*qy) - r;
 }
