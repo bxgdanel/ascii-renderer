@@ -1,0 +1,32 @@
+[
+{
+  "directory": "C:/Users/lucab/Documents/ascii-renderer/build",
+  "command": "C:\\mingw64\\bin\\g++.exe   -g -std=gnu++17 -o CMakeFiles\\ascii_r.dir\\main2.cpp.obj -c C:\\Users\\lucab\\Documents\\ascii-renderer\\main2.cpp",
+  "file": "C:/Users/lucab/Documents/ascii-renderer/main2.cpp",
+  "output": "CMakeFiles/ascii_r.dir/main2.cpp.obj"
+},
+{
+  "directory": "C:/Users/lucab/Documents/ascii-renderer/build",
+  "command": "C:\\mingw64\\bin\\g++.exe   -g -std=gnu++17 -o CMakeFiles\\ascii_r.dir\\domain.cpp.obj -c C:\\Users\\lucab\\Documents\\ascii-renderer\\domain.cpp",
+  "file": "C:/Users/lucab/Documents/ascii-renderer/domain.cpp",
+  "output": "CMakeFiles/ascii_r.dir/domain.cpp.obj"
+},
+{
+  "directory": "C:/Users/lucab/Documents/ascii-renderer/build",
+  "command": "C:\\mingw64\\bin\\g++.exe   -g -std=gnu++17 -o CMakeFiles\\ascii_r.dir\\perspectiverenderer.cpp.obj -c C:\\Users\\lucab\\Documents\\ascii-renderer\\perspectiverenderer.cpp",
+  "file": "C:/Users/lucab/Documents/ascii-renderer/perspectiverenderer.cpp",
+  "output": "CMakeFiles/ascii_r.dir/perspectiverenderer.cpp.obj"
+},
+{
+  "directory": "C:/Users/lucab/Documents/ascii-renderer/build",
+  "command": "C:\\mingw64\\bin\\g++.exe   -g -std=gnu++17 -o CMakeFiles\\ascii_r.dir\\renderer.cpp.obj -c C:\\Users\\lucab\\Documents\\ascii-renderer\\renderer.cpp",
+  "file": "C:/Users/lucab/Documents/ascii-renderer/renderer.cpp",
+  "output": "CMakeFiles/ascii_r.dir/renderer.cpp.obj"
+},
+{
+  "directory": "C:/Users/lucab/Documents/ascii-renderer/build",
+  "command": "C:\\mingw64\\bin\\g++.exe   -g -std=gnu++17 -o CMakeFiles\\ascii_r.dir\\Camera.cpp.obj -c C:\\Users\\lucab\\Documents\\ascii-renderer\\Camera.cpp",
+  "file": "C:/Users/lucab/Documents/ascii-renderer/Camera.cpp",
+  "output": "CMakeFiles/ascii_r.dir/Camera.cpp.obj"
+}
+]
