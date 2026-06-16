@@ -97,24 +97,10 @@ CMakeFiles/ascii_r.dir/domain.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/ascii_r.dir/domain.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /media/bogdanel/uhhhhh/ascii-renderer/domain.cpp -o CMakeFiles/ascii_r.dir/domain.cpp.s
 
-CMakeFiles/ascii_r.dir/perspectiverenderer.cpp.o: CMakeFiles/ascii_r.dir/flags.make
-CMakeFiles/ascii_r.dir/perspectiverenderer.cpp.o: /media/bogdanel/uhhhhh/ascii-renderer/perspectiverenderer.cpp
-CMakeFiles/ascii_r.dir/perspectiverenderer.cpp.o: CMakeFiles/ascii_r.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/media/bogdanel/uhhhhh/ascii-renderer/out/Debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/ascii_r.dir/perspectiverenderer.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/ascii_r.dir/perspectiverenderer.cpp.o -MF CMakeFiles/ascii_r.dir/perspectiverenderer.cpp.o.d -o CMakeFiles/ascii_r.dir/perspectiverenderer.cpp.o -c /media/bogdanel/uhhhhh/ascii-renderer/perspectiverenderer.cpp
-
-CMakeFiles/ascii_r.dir/perspectiverenderer.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/ascii_r.dir/perspectiverenderer.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /media/bogdanel/uhhhhh/ascii-renderer/perspectiverenderer.cpp > CMakeFiles/ascii_r.dir/perspectiverenderer.cpp.i
-
-CMakeFiles/ascii_r.dir/perspectiverenderer.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/ascii_r.dir/perspectiverenderer.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /media/bogdanel/uhhhhh/ascii-renderer/perspectiverenderer.cpp -o CMakeFiles/ascii_r.dir/perspectiverenderer.cpp.s
-
 CMakeFiles/ascii_r.dir/renderer.cpp.o: CMakeFiles/ascii_r.dir/flags.make
 CMakeFiles/ascii_r.dir/renderer.cpp.o: /media/bogdanel/uhhhhh/ascii-renderer/renderer.cpp
 CMakeFiles/ascii_r.dir/renderer.cpp.o: CMakeFiles/ascii_r.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/media/bogdanel/uhhhhh/ascii-renderer/out/Debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/ascii_r.dir/renderer.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/media/bogdanel/uhhhhh/ascii-renderer/out/Debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/ascii_r.dir/renderer.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/ascii_r.dir/renderer.cpp.o -MF CMakeFiles/ascii_r.dir/renderer.cpp.o.d -o CMakeFiles/ascii_r.dir/renderer.cpp.o -c /media/bogdanel/uhhhhh/ascii-renderer/renderer.cpp
 
 CMakeFiles/ascii_r.dir/renderer.cpp.i: cmake_force
@@ -128,7 +114,7 @@ CMakeFiles/ascii_r.dir/renderer.cpp.s: cmake_force
 CMakeFiles/ascii_r.dir/Camera.cpp.o: CMakeFiles/ascii_r.dir/flags.make
 CMakeFiles/ascii_r.dir/Camera.cpp.o: /media/bogdanel/uhhhhh/ascii-renderer/Camera.cpp
 CMakeFiles/ascii_r.dir/Camera.cpp.o: CMakeFiles/ascii_r.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/media/bogdanel/uhhhhh/ascii-renderer/out/Debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/ascii_r.dir/Camera.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/media/bogdanel/uhhhhh/ascii-renderer/out/Debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/ascii_r.dir/Camera.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/ascii_r.dir/Camera.cpp.o -MF CMakeFiles/ascii_r.dir/Camera.cpp.o.d -o CMakeFiles/ascii_r.dir/Camera.cpp.o -c /media/bogdanel/uhhhhh/ascii-renderer/Camera.cpp
 
 CMakeFiles/ascii_r.dir/Camera.cpp.i: cmake_force
@@ -143,7 +129,6 @@ CMakeFiles/ascii_r.dir/Camera.cpp.s: cmake_force
 ascii_r_OBJECTS = \
 "CMakeFiles/ascii_r.dir/main2.cpp.o" \
 "CMakeFiles/ascii_r.dir/domain.cpp.o" \
-"CMakeFiles/ascii_r.dir/perspectiverenderer.cpp.o" \
 "CMakeFiles/ascii_r.dir/renderer.cpp.o" \
 "CMakeFiles/ascii_r.dir/Camera.cpp.o"
 
@@ -152,12 +137,11 @@ ascii_r_EXTERNAL_OBJECTS =
 
 ascii_r: CMakeFiles/ascii_r.dir/main2.cpp.o
 ascii_r: CMakeFiles/ascii_r.dir/domain.cpp.o
-ascii_r: CMakeFiles/ascii_r.dir/perspectiverenderer.cpp.o
 ascii_r: CMakeFiles/ascii_r.dir/renderer.cpp.o
 ascii_r: CMakeFiles/ascii_r.dir/Camera.cpp.o
 ascii_r: CMakeFiles/ascii_r.dir/build.make
 ascii_r: CMakeFiles/ascii_r.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/media/bogdanel/uhhhhh/ascii-renderer/out/Debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Linking CXX executable ascii_r"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/media/bogdanel/uhhhhh/ascii-renderer/out/Debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Linking CXX executable ascii_r"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/ascii_r.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

@@ -5,8 +5,6 @@ file(REMOVE_RECURSE
   "CMakeFiles/ascii_r.dir/domain.cpp.o.d"
   "CMakeFiles/ascii_r.dir/main2.cpp.o"
   "CMakeFiles/ascii_r.dir/main2.cpp.o.d"
-  "CMakeFiles/ascii_r.dir/perspectiverenderer.cpp.o"
-  "CMakeFiles/ascii_r.dir/perspectiverenderer.cpp.o.d"
   "CMakeFiles/ascii_r.dir/renderer.cpp.o"
   "CMakeFiles/ascii_r.dir/renderer.cpp.o.d"
   "ascii_r"

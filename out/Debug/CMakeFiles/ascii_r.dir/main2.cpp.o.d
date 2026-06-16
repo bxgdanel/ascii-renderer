@@ -1,8 +1,6 @@
 CMakeFiles/ascii_r.dir/main2.cpp.o: \
  /media/bogdanel/uhhhhh/ascii-renderer/main2.cpp \
  /usr/include/stdc-predef.h \
- /media/bogdanel/uhhhhh/ascii-renderer/PerspectiveRenderer.h \
- /media/bogdanel/uhhhhh/ascii-renderer/renderer.h \
  /media/bogdanel/uhhhhh/ascii-renderer/Camera.h \
  /usr/include/c++/13/vector /usr/include/c++/13/bits/requires_hosted.h \
  /usr/include/x86_64-linux-gnu/c++/13/bits/c++config.h \
@@ -111,8 +109,9 @@ CMakeFiles/ascii_r.dir/main2.cpp.o: \
  /usr/include/c++/13/tr1/modified_bessel_func.tcc \
  /usr/include/c++/13/tr1/poly_hermite.tcc \
  /usr/include/c++/13/tr1/poly_laguerre.tcc \
- /usr/include/c++/13/tr1/riemann_zeta.tcc /usr/include/c++/13/string \
- /usr/include/c++/13/bits/stringfwd.h \
+ /usr/include/c++/13/tr1/riemann_zeta.tcc \
+ /media/bogdanel/uhhhhh/ascii-renderer/renderer.h \
+ /usr/include/c++/13/string /usr/include/c++/13/bits/stringfwd.h \
  /usr/include/c++/13/bits/char_traits.h \
  /usr/include/c++/13/bits/postypes.h /usr/include/c++/13/cwchar \
  /usr/include/wchar.h /usr/lib/gcc/x86_64-linux-gnu/13/include/stdarg.h \

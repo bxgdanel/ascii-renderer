@@ -11,7 +11,6 @@ set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/media/bogdanel/uhhhhh/ascii-renderer/Camera.cpp" "CMakeFiles/ascii_r.dir/Camera.cpp.o" "gcc" "CMakeFiles/ascii_r.dir/Camera.cpp.o.d"
   "/media/bogdanel/uhhhhh/ascii-renderer/domain.cpp" "CMakeFiles/ascii_r.dir/domain.cpp.o" "gcc" "CMakeFiles/ascii_r.dir/domain.cpp.o.d"
   "/media/bogdanel/uhhhhh/ascii-renderer/main2.cpp" "CMakeFiles/ascii_r.dir/main2.cpp.o" "gcc" "CMakeFiles/ascii_r.dir/main2.cpp.o.d"
-  "/media/bogdanel/uhhhhh/ascii-renderer/perspectiverenderer.cpp" "CMakeFiles/ascii_r.dir/perspectiverenderer.cpp.o" "gcc" "CMakeFiles/ascii_r.dir/perspectiverenderer.cpp.o.d"
   "/media/bogdanel/uhhhhh/ascii-renderer/renderer.cpp" "CMakeFiles/ascii_r.dir/renderer.cpp.o" "gcc" "CMakeFiles/ascii_r.dir/renderer.cpp.o.d"
   )
 

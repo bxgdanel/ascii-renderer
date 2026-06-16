@@ -201,30 +201,6 @@ main2.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/ascii_r.dir/build.make CMakeFiles/ascii_r.dir/main2.cpp.s
 .PHONY : main2.cpp.s
 
-perspectiverenderer.o: perspectiverenderer.cpp.o
-.PHONY : perspectiverenderer.o
-
-# target to build an object file
-perspectiverenderer.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ascii_r.dir/build.make CMakeFiles/ascii_r.dir/perspectiverenderer.cpp.o
-.PHONY : perspectiverenderer.cpp.o
-
-perspectiverenderer.i: perspectiverenderer.cpp.i
-.PHONY : perspectiverenderer.i
-
-# target to preprocess a source file
-perspectiverenderer.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ascii_r.dir/build.make CMakeFiles/ascii_r.dir/perspectiverenderer.cpp.i
-.PHONY : perspectiverenderer.cpp.i
-
-perspectiverenderer.s: perspectiverenderer.cpp.s
-.PHONY : perspectiverenderer.s
-
-# target to generate assembly for a file
-perspectiverenderer.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ascii_r.dir/build.make CMakeFiles/ascii_r.dir/perspectiverenderer.cpp.s
-.PHONY : perspectiverenderer.cpp.s
-
 renderer.o: renderer.cpp.o
 .PHONY : renderer.o
 
@@ -267,9 +243,6 @@ help:
 	@echo "... main2.o"
 	@echo "... main2.i"
 	@echo "... main2.s"
-	@echo "... perspectiverenderer.o"
-	@echo "... perspectiverenderer.i"
-	@echo "... perspectiverenderer.s"
 	@echo "... renderer.o"
 	@echo "... renderer.i"
 	@echo "... renderer.s"

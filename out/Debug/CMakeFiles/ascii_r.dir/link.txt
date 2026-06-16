@@ -1,1 +1,1 @@
-/usr/bin/c++ -g CMakeFiles/ascii_r.dir/main2.cpp.o CMakeFiles/ascii_r.dir/domain.cpp.o CMakeFiles/ascii_r.dir/perspectiverenderer.cpp.o CMakeFiles/ascii_r.dir/renderer.cpp.o CMakeFiles/ascii_r.dir/Camera.cpp.o -o ascii_r 
+/usr/bin/c++ -g CMakeFiles/ascii_r.dir/main2.cpp.o CMakeFiles/ascii_r.dir/domain.cpp.o CMakeFiles/ascii_r.dir/renderer.cpp.o CMakeFiles/ascii_r.dir/Camera.cpp.o -o ascii_r 

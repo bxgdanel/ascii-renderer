@@ -4,12 +4,12 @@
 #include <stdio.h>
 #include <unistd.h>
 using namespace std;
-Renderer:: Renderer(int w, int h, float ls[3], Camera camera) {
+Renderer::Renderer(int w, int h, float ls[3], Camera camera) {
   W_size = w;
   H_size = h;
   light_source[0] = ls[0];
   light_source[1] = ls[1];
-  light_source[1] = ls[2];
+  light_source[2] = ls[2];
 
   a.resize(W_size, vector<int>(H_size, 0));
   zbuf.resize(W_size, vector<float>(H_size, 0.0f));
@@ -52,7 +52,7 @@ void Renderer::render() {
           if (t < t_min && t > 0) {
             t_min = t;
             closest_surf = s;
-            copy(begin(normal),end(normal),begin(intersection_norm));
+            copy(begin(normal), end(normal), begin(intersection_norm));
           }
       }
       if (closest_surf != nullptr) {
@@ -68,9 +68,11 @@ void Renderer::render() {
                            intersection_norm[1] * light_source[1] +
                            intersection_norm[2] * light_source[2];
         float ambient = 0.15f;
-        if(brightness < 0.0f) brightness = 0.0f;
+        if (brightness < 0.0f)
+          brightness = 0.0f;
         brightness += ambient;
-        if (brightness > 1.0f) brightness = 1.0f;
+        if (brightness > 1.0f)
+          brightness = 1.0f;
         a[x][y] = brightness * (printvals_len - 1);
       } else {
         a[x][y] = 0;
