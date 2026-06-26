@@ -133,12 +133,32 @@ void Cube::generate() {
         float absY = std::abs(y);
         float absZ = std::abs(z);
 
+        Color c;
+
         if (absX >= absY && absX >= absZ) {
-          nx = (x > 0) ? 1.0 : -1.0;
+          if (x > 0) {
+            nx = 1.0;
+            c = Color{0, 255, 0};
+          } else {
+            nx = -1.0;
+            c = Color{0, 0, 255};
+          }
         } else if (absY >= absX && absY >= absZ) {
-          ny = (y > 0) ? 1.0 : -1.0;
+          if (y > 0) {
+            ny = 1.0;
+            c = Color(255, 255, 255);
+          } else {
+            ny = -1.0;
+            c = Color(255, 255, 0);
+          }
         } else {
-          nz = (z > 0) ? 1.0 : -1.0;
+          if (z > 0) {
+            nz = 1.0;
+            c = Color{255, 165, 0};
+          } else {
+            nz = -1.0;
+            c = Color{255, 0, 0};
+          }
         }
         vector<float> tmp_normals;
         tmp_normals.push_back(nx);
@@ -147,6 +167,7 @@ void Cube::generate() {
 
         points.push_back(tmp);
         normals.push_back(tmp_normals);
+        colors.push_back(c);
       }
   size = points.size();
 }

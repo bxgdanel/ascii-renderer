@@ -27,6 +27,7 @@ void PerspectiveRenderer::render() {
                                    s->normals[i][2] * light_source[2];
           brightness_value = brightness_value > 0 ? brightness_value : 0.05f;
           a[screen_x][screen_y] = brightness_value * (printvals_len - 1);
+          color_mat[screen_x][screen_y] = s->colors[i];
         }
       }
     }
@@ -36,6 +37,13 @@ void PerspectiveRenderer::ResetDepthBuffer() {
     for (int y = 0; y < H_size; y++)
       zbuf[x][y] = 1e19;
 }
+void PerspectiveRenderer::print_buffer() {
+  for (int y = H_size - 1; y >= 0; y--, printf("\n"))
+    for (int x = 0; x < W_size - 1; x++, printf(" ")) {
+      printf("\033[38;2;%d;%d;%dm%c\033[0m", color_mat[x][y].r,
+             color_mat[x][y].g, color_mat[x][y].b, printvals[a[x][y]]);
+    }
+}
 PerspectiveRenderer::PerspectiveRenderer(int w, int h, vector<float> ls,
                                          int _fov) {
   W_size = w;
@@ -44,7 +52,7 @@ PerspectiveRenderer::PerspectiveRenderer(int w, int h, vector<float> ls,
   fov = _fov;
   a.resize(W_size, vector<int>(H_size, 0));
   zbuf.resize(W_size, vector<float>(H_size, 0.0f));
-
+  color_mat.resize(W_size, vector<Color>(H_size, Color()));
   float we = sqrt(pow(light_source[0], 2) + pow(light_source[1], 2) +
                   pow(light_source[2], 2));
   light_source[0] = light_source[0] / we;
