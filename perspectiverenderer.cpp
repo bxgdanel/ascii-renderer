@@ -25,7 +25,7 @@ void PerspectiveRenderer::render() {
           float brightness_value = s->normals[i][0] * light_source[0] +
                                    s->normals[i][1] * light_source[1] +
                                    s->normals[i][2] * light_source[2];
-          brightness_value = brightness_value > 0 ? brightness_value : 0.05f;
+          brightness_value = brightness_value > 0 ? brightness_value : 0.10f;
           a[screen_x][screen_y] = brightness_value * (printvals_len - 1);
           color_mat[screen_x][screen_y] = s->colors[i];
         }

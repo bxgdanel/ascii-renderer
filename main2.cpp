@@ -4,19 +4,20 @@
 #include <unistd.h>
 #include <vector>
 int main() {
-  std::vector<float> ls{0, 0, -1};
+  std::vector<float> ls{0, 1, -1};
   PerspectiveRenderer r = PerspectiveRenderer(160, 80, ls, 60);
   Torus t{6, 3};
   Cube c{30, 30, 30};
   t.generate();
   c.generate();
-  r.add_shape(&c);
+  r.add_shape(&t);
   c.translate(-10, 0, 75);
+  t.translate(-10, 0, 75);
   for (int i = 0; i < 150; i++) {
     r.display();
-    c.rotate_z(-10 * 3.14 / 180);
-    c.rotate_x(-10 * 3.14 / 180);
-    usleep(10000);
+    t.rotate_z(-10 * 3.14 / 180);
+    t.rotate_x(-10 * 3.14 / 180);
+    // usleep(10000);
   }
 }
 /*

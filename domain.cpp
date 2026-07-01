@@ -12,7 +12,7 @@ void Torus::generate() {
       tmp_norm.push_back(cos(theta) * cos(phi));
       tmp_norm.push_back(cos(theta) * sin(phi));
       tmp_norm.push_back(sin(theta));
-
+      colors.push_back(Color{255, 255, 255});
       points.push_back(tmp);
       normals.push_back(tmp_norm);
     }
