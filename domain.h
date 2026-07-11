@@ -29,15 +29,8 @@ public:
   void rotate_z_pivot(float unghi, float x, float y, float z);
   virtual void translate(float x, float y, float z);
 };
-class Torus : public Surface {
-  int dim_r, dim_R;
-
-public:
-  Torus(int rm, int RM) : dim_r(rm), dim_R(RM) {}
-  void generate() override;
-};
 class Cube : public Surface {
-  int l, w, h;
+  float l, w, h;
 
 public:
   Cube() = default;
@@ -51,7 +44,7 @@ class Rubik : public Surface {
 public:
   Rubik(PerspectiveRenderer *r) : ren{r} {
     for (int i = 0; i < 27; i++)
-      cubes[i] = Cube(10, 10, 10);
+      cubes[i] = Cube(9.5, 9.5, 9.5);
   };
   void generate() override;
   void translate(float x, float y, float z) override;
@@ -61,6 +54,7 @@ public:
   void rotate_layer_y(int layer, float unghi);
   void rotate_layer_z(int layer, float unghi);
 
+  void temp_rot_y(float unghi);
   void R(int sens = 1);
   void U(int sens = 1);
 };

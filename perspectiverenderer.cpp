@@ -13,10 +13,13 @@ void PerspectiveRenderer::render() {
       if (s->points[i][2] <= 0.1f)
         continue;
 
-      float aspect_ratio_comp = W_size / H_size;
+      float font_aspect_ratio = 2.0f;
       int screen_x =
-          s->points[i][0] * fov * 2.0f / s->points[i][2] + W_size / 2;
-      int screen_y = s->points[i][1] * fov / s->points[i][2] + H_size / 2;
+          (s->points[i][0] * fov * font_aspect_ratio) / s->points[i][2] +
+          (float)W_size / 2;
+      int screen_y =
+          (s->points[i][1] * fov * font_aspect_ratio) / s->points[i][2] +
+          (float)H_size / 2;
 
       if (screen_x < W_size && screen_x >= 0 && screen_y < H_size &&
           screen_y >= 0) {

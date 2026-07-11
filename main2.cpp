@@ -9,7 +9,8 @@ int main() {
   Rubik c{&r};
   c.generate();
   c.register_cubes(&r);
-  c.translate(-10, 0, 75);
+  c.translate(-10, -5, 75);
+  // c.temp_rot_y(M_PI / 4);
   for (int i = 0; i < 6; i++) {
     c.R();
     c.U();

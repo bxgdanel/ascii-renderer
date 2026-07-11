@@ -1,25 +1,7 @@
 #include "domain.h"
 #include "PerspectiveRenderer.h"
 // #include "renderer.h"
-void Torus::generate() {
-  float R = dim_r, r = dim_r;
-  for (float theta = 0; theta < 6.28; theta += 0.03)
-    for (float phi = 0; phi < 6.28; phi += 0.03) {
-      vector<float> tmp;
-      vector<float> tmp_norm;
-      tmp.push_back((R + r * cos(theta)) * cos(phi)); // x conform ec param
-      tmp.push_back((R + r * cos(theta)) * sin(phi)); // y conform ec param
-      tmp.push_back(r * sin(theta));
 
-      tmp_norm.push_back(cos(theta) * cos(phi));
-      tmp_norm.push_back(cos(theta) * sin(phi));
-      tmp_norm.push_back(sin(theta));
-      colors.push_back(Color{255, 255, 255});
-      points.push_back(tmp);
-      normals.push_back(tmp_norm);
-    }
-  size = points.size();
-}
 void Surface::rotate_x(float unghi) {
   float RotationMatrix[3][3] = {
       {1, 0, 0},
@@ -277,33 +259,33 @@ void Cube::generate() {
         float absY = std::abs(y);
         float absZ = std::abs(z);
 
-        Color c;
+        /* Color c;
 
-        if (absX >= absY && absX >= absZ) {
-          if (x > 0) {
-            nx = 1.0;
-            c = Color{0, 255, 0};
-          } else {
-            nx = -1.0;
-            c = Color{0, 0, 255};
-          }
-        } else if (absY >= absX && absY >= absZ) {
-          if (y > 0) {
-            ny = 1.0;
-            c = Color(255, 255, 255);
-          } else {
-            ny = -1.0;
-            c = Color(255, 255, 0);
-          }
-        } else {
-          if (z > 0) {
-            nz = 1.0;
-            c = Color{255, 165, 0};
-          } else {
-            nz = -1.0;
-            c = Color{255, 0, 0};
-          }
-        }
+         if (absX >= absY && absX >= absZ) {
+           if (x > 0) {
+             nx = 1.0;
+             c = Color{0, 255, 0};
+           } else {
+             nx = -1.0;
+             c = Color{0, 0, 255};
+           }
+         } else if (absY >= absX && absY >= absZ) {
+           if (y > 0) {
+             ny = 1.0;
+             c = Color(255, 255, 255);
+           } else {
+             ny = -1.0;
+             c = Color(255, 255, 0);
+           }
+         } else {
+           if (z > 0) {
+             nz = 1.0;
+             c = Color{255, 165, 0};
+           } else {
+             nz = -1.0;
+             c = Color{255, 0, 0};
+           }
+         }*/
         vector<float> tmp_normals;
         tmp_normals.push_back(nx);
         tmp_normals.push_back(ny);
@@ -311,7 +293,7 @@ void Cube::generate() {
 
         points.push_back(tmp);
         normals.push_back(tmp_normals);
-        colors.push_back(c);
+        colors.push_back(Color{50, 50, 50});
       }
   size = points.size();
 }
@@ -321,6 +303,27 @@ void Rubik::generate() {
       cubes[i * 9 + j].generate();
       cubes[i * 9 + j].translate((j % 3) * 10, (j / 3) * 10, i * 10);
     }
+  for (auto &c : cubes) {
+    for (int k = 0; k < c.size; k++) {
+      // Setăm o culoare neutră implicită pentru interior
+      c.colors[k] = Color{50, 50, 50};
+
+      // Verificăm dacă punctul se află pe una dintre cele 6 limite exterioare
+      // globale
+      if (c.points[k][0] > 24.0f)
+        c.colors[k] = Color{0, 255, 0}; // R
+      else if (c.points[k][0] < -4.0f)
+        c.colors[k] = Color{0, 0, 255}; // L
+      else if (c.points[k][1] > 24.0f)
+        c.colors[k] = Color{255, 255, 255}; // U
+      else if (c.points[k][1] < -4.0f)
+        c.colors[k] = Color{255, 255, 0}; // D
+      else if (c.points[k][2] > 24.0f)
+        c.colors[k] = Color{255, 165, 0}; // F
+      else if (c.points[k][2] < -4.0f)
+        c.colors[k] = Color{255, 0, 0}; // B
+    }
+  }
   this->center[0] = 10.0f;
   this->center[1] = 10.0f;
   this->center[2] = 10.0f;
@@ -341,14 +344,14 @@ void Rubik::register_cubes(PerspectiveRenderer *r) {
 void Rubik::rotate_layer_x(int layer, float unghi) {
   float target_x = this->center[0] + layer * 10.0f;
   for (auto &c : cubes)
-    if (std::abs(c.center[0] - target_x) < 1.0f)
+    if (std::abs(c.center[0] - target_x) < .5f)
       c.rotate_x_pivot(unghi, this->center[0], this->center[1],
                        this->center[2]);
 }
 void Rubik::rotate_layer_y(int layer, float unghi) {
   float target_x = this->center[1] + layer * 10.0f;
   for (auto &c : cubes)
-    if (std::abs(c.center[1] - target_x) < 1.0f)
+    if (std::abs(c.center[1] - target_x) < .5f)
       c.rotate_y_pivot(unghi, this->center[0], this->center[1],
                        this->center[2]);
 }
@@ -356,7 +359,7 @@ void Rubik::rotate_layer_y(int layer, float unghi) {
 void Rubik::rotate_layer_z(int layer, float unghi) {
   float target_x = this->center[2] + layer * 10.0f;
   for (auto &c : cubes)
-    if (std::abs(c.center[2] - target_x) < 1.0f)
+    if (std::abs(c.center[2] - target_x) < .5f)
       c.rotate_z_pivot(unghi, this->center[0], this->center[1],
                        this->center[2]);
 }
@@ -371,8 +374,11 @@ void Rubik::R(int sens) {
 void Rubik::U(int sens) {
   float val = M_PI / 2;
   for (int i = 0; i < 10; i++) {
-
     rotate_layer_y(1, sens * (val / 10));
     ren->display();
   }
+}
+void Rubik::temp_rot_y(float unghi) {
+  for (auto &c : cubes)
+    c.rotate_y_pivot(unghi, this->center[0], this->center[1], this->center[2]);
 }
