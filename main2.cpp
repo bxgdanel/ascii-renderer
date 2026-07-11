@@ -6,23 +6,18 @@
 int main() {
   std::vector<float> ls{0, 1, -1};
   PerspectiveRenderer r = PerspectiveRenderer(160, 80, ls, 60);
-  Torus t{6, 3};
-  Cube c{30, 30, 30};
-  t.generate();
+  Rubik c{&r};
   c.generate();
-  r.add_shape(&t);
+  c.register_cubes(&r);
   c.translate(-10, 0, 75);
-  t.translate(-10, 0, 75);
-  for (int i = 0; i < 150; i++) {
-    r.display();
-    t.rotate_z(-10 * 3.14 / 180);
-    t.rotate_x(-10 * 3.14 / 180);
-    // usleep(10000);
+  for (int i = 0; i < 6; i++) {
+    c.R();
+    c.U();
+    c.R(-1);
+    c.U(-1);
   }
+  // for (int i = 0; i < 150; i++) {
+  //  r.display();
+  //   usleep(10000);
+  //}
 }
-/*
- cd folderul_proiectului:
-mkdir build && cd build
-cmake ..          # Generează fișierele de build (Makefiles)
-cmake --build .   # Compilează proiectul efectiv
-  */
