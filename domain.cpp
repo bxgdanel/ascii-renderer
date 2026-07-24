@@ -86,6 +86,7 @@ void Surface::rotate_x_pivot(float unghi, float x_, float y_, float z_) {
                     RotationMatrix[1][2] * cz;
   this->center[2] = RotationMatrix[2][0] * cx + RotationMatrix[2][1] * cy +
                     RotationMatrix[2][2] * cz;
+
   points = points_cpy;
   normals = normals_cpy;
   this->translate(x_, y_, z_);
@@ -300,16 +301,15 @@ void Cube::generate() {
 void Rubik::generate() {
   for (int i = 0; i < 3; i++)
     for (int j = 0; j < 9; j++) {
+      cubes[i * 9 + j].lx = j % 3;
+      cubes[i * 9 + j].ly = j / 3;
+      cubes[i * 9 + j].lz = i;
       cubes[i * 9 + j].generate();
       cubes[i * 9 + j].translate((j % 3) * 10, (j / 3) * 10, i * 10);
     }
   for (auto &c : cubes) {
     for (int k = 0; k < c.size; k++) {
-      // Setăm o culoare neutră implicită pentru interior
       c.colors[k] = Color{50, 50, 50};
-
-      // Verificăm dacă punctul se află pe una dintre cele 6 limite exterioare
-      // globale
       if (c.points[k][0] > 24.0f)
         c.colors[k] = Color{0, 255, 0}; // R
       else if (c.points[k][0] < -4.0f)
@@ -342,16 +342,14 @@ void Rubik::register_cubes(PerspectiveRenderer *r) {
   }
 }
 void Rubik::rotate_layer_x(int layer, float unghi) {
-  float target_x = this->center[0] + layer * 10.0f;
   for (auto &c : cubes)
-    if (std::abs(c.center[0] - target_x) < .5f)
+    if (c.lx == layer)
       c.rotate_x_pivot(unghi, this->center[0], this->center[1],
                        this->center[2]);
 }
 void Rubik::rotate_layer_y(int layer, float unghi) {
-  float target_x = this->center[1] + layer * 10.0f;
   for (auto &c : cubes)
-    if (std::abs(c.center[1] - target_x) < .5f)
+    if (c.ly == layer)
       c.rotate_y_pivot(unghi, this->center[0], this->center[1],
                        this->center[2]);
 }
@@ -359,7 +357,7 @@ void Rubik::rotate_layer_y(int layer, float unghi) {
 void Rubik::rotate_layer_z(int layer, float unghi) {
   float target_x = this->center[2] + layer * 10.0f;
   for (auto &c : cubes)
-    if (std::abs(c.center[2] - target_x) < .5f)
+    if (c.lz == layer)
       c.rotate_z_pivot(unghi, this->center[0], this->center[1],
                        this->center[2]);
 }
@@ -367,18 +365,162 @@ void Rubik::R(int sens) {
   float val = M_PI / 2;
   for (int i = 0; i < 10; i++) {
 
-    rotate_layer_x(1, sens * (val / 10));
+    rotate_layer_x(2, sens * (val / 10));
     ren->display();
+  }
+  for (auto &c : cubes)
+    c.snap_to_surface();
+  for (auto &c : cubes) {
+    if (c.lx == 2) {
+      int old_ly = c.ly;
+      int old_lz = c.lz;
+
+      if (sens == 1) {
+        c.ly = 2 - old_lz;
+        c.lz = old_ly;
+      } else {
+        c.lz = 2 - old_ly;
+        c.ly = old_lz;
+      }
+    }
   }
 }
 void Rubik::U(int sens) {
   float val = M_PI / 2;
   for (int i = 0; i < 10; i++) {
-    rotate_layer_y(1, sens * (val / 10));
+    rotate_layer_y(2, sens * (val / 10));
     ren->display();
+  }
+  for (auto &c : cubes)
+    c.snap_to_surface();
+  for (auto &c : cubes) {
+    if (c.ly == 2) {
+      int old_lx = c.lx;
+      int old_lz = c.lz;
+      if (sens == 1) {
+        c.lx = old_lz;
+        c.lz = 2 - old_lx;
+      } else {
+        c.lx = 2 - old_lz;
+        c.lz = old_lx;
+      }
+    }
+  }
+}
+
+void Rubik::L(int sens) {
+  float val = M_PI / 2;
+  for (int i = 0; i < 10; i++) {
+    rotate_layer_x(0, -sens * (val / 10));
+    ren->display();
+  }
+  for (auto &c : cubes)
+    c.snap_to_surface();
+  for (auto &c : cubes) {
+    if (c.lx == 0) {
+      int old_ly = c.ly;
+      int old_lz = c.lz;
+      // L se roteste invers decat R relativ la axa X
+      if (sens == 1) {
+        c.ly = old_lz;
+        c.lz = 2 - old_ly;
+      } else {
+        c.ly = 2 - old_lz;
+        c.lz = old_ly;
+      }
+    }
+  }
+}
+
+void Rubik::D(int sens) {
+  float val = M_PI / 2;
+  for (int i = 0; i < 10; i++) {
+    rotate_layer_y(0, -sens * (val / 10));
+    ren->display();
+  }
+  for (auto &c : cubes)
+    c.snap_to_surface();
+  for (auto &c : cubes) {
+    if (c.ly == 0) {
+      int old_lx = c.lx;
+      int old_lz = c.lz;
+      // D se roteste invers decat U relativ la axa Y
+      if (sens == 1) {
+        c.lx = 2 - old_lz;
+        c.lz = old_lx;
+      } else {
+        c.lx = old_lz;
+        c.lz = 2 - old_lx;
+      }
+    }
+  }
+}
+
+void Rubik::F(int sens) {
+  float val = M_PI / 2;
+  for (int i = 0; i < 10; i++) {
+    rotate_layer_z(2, -sens * (val / 10)); // Corectat: stratul 2 in loc de 0
+    ren->display();
+  }
+  for (auto &c : cubes)
+    c.snap_to_surface();
+  for (auto &c : cubes) {
+    if (c.lz == 2) {
+      int old_lx = c.lx;
+      int old_ly = c.ly;
+      if (sens == 1) {
+        c.lx = old_ly;
+        c.ly = 2 - old_lx;
+      } else {
+        c.lx = 2 - old_ly;
+        c.ly = old_lx;
+      }
+    }
+  }
+}
+
+void Rubik::B(int sens) {
+  float val = M_PI / 2;
+  for (int i = 0; i < 10; i++) {
+    rotate_layer_z(0, sens * (val / 10));
+    ren->display();
+  }
+  for (auto &c : cubes)
+    c.snap_to_surface();
+  for (auto &c : cubes) {
+    if (c.lz == 0) {
+      int old_lx = c.lx;
+      int old_ly = c.ly;
+      if (sens == 1) {
+        c.lx = 2 - old_ly;
+        c.ly = old_lx;
+      } else {
+        c.lx = old_ly;
+        c.ly = 2 - old_lx;
+      }
+    }
+  }
+}
+void Surface::snap_to_surface() {
+  for (int i = 0; i < this->size; i++) {
+    this->points[i][0] = std::round(this->points[i][0] * 4.0f) / 4.0f;
+    this->points[i][1] = std::round(this->points[i][1] * 4.0f) / 4.0f;
+    this->points[i][2] = std::round(this->points[i][2] * 4.0f) / 4.0f;
+
+    float nx = this->normals[i][0];
+    float ny = this->normals[i][1];
+    float nz = this->normals[i][2];
+
+    float len = std::sqrt(nx * nx + ny * ny + nz * nz);
+    if (len > 0.0001f) {
+      this->normals[i][0] /= len;
+      this->normals[i][1] /= len;
+      this->normals[i][2] /= len;
+    }
   }
 }
 void Rubik::temp_rot_y(float unghi) {
-  for (auto &c : cubes)
+  for (auto &c : cubes) {
     c.rotate_y_pivot(unghi, this->center[0], this->center[1], this->center[2]);
+  }
 }

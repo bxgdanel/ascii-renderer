@@ -267,15 +267,18 @@ CMakeFiles/ascii_r.dir/main2.cpp.o: /media/bogdanel/uhhhhh/ascii-renderer/main2.
   /usr/include/ctype.h \
   /usr/include/endian.h \
   /usr/include/errno.h \
+  /usr/include/fcntl.h \
   /usr/include/features-time64.h \
   /usr/include/features.h \
   /usr/include/linux/close_range.h \
   /usr/include/linux/errno.h \
+  /usr/include/linux/falloc.h \
   /usr/include/locale.h \
   /usr/include/math.h \
   /usr/include/stdc-predef.h \
   /usr/include/stdio.h \
   /usr/include/stdlib.h \
+  /usr/include/termios.h \
   /usr/include/unistd.h \
   /usr/include/wchar.h \
   /usr/include/x86_64-linux-gnu/asm/errno.h \
@@ -286,6 +289,8 @@ CMakeFiles/ascii_r.dir/main2.cpp.o: /media/bogdanel/uhhhhh/ascii-renderer/main2.
   /usr/include/x86_64-linux-gnu/bits/endianness.h \
   /usr/include/x86_64-linux-gnu/bits/environments.h \
   /usr/include/x86_64-linux-gnu/bits/errno.h \
+  /usr/include/x86_64-linux-gnu/bits/fcntl-linux.h \
+  /usr/include/x86_64-linux-gnu/bits/fcntl.h \
   /usr/include/x86_64-linux-gnu/bits/floatn-common.h \
   /usr/include/x86_64-linux-gnu/bits/floatn.h \
   /usr/include/x86_64-linux-gnu/bits/flt-eval-method.h \
@@ -306,11 +311,23 @@ CMakeFiles/ascii_r.dir/main2.cpp.o: /media/bogdanel/uhhhhh/ascii-renderer/main2.
   /usr/include/x86_64-linux-gnu/bits/pthreadtypes-arch.h \
   /usr/include/x86_64-linux-gnu/bits/pthreadtypes.h \
   /usr/include/x86_64-linux-gnu/bits/select.h \
+  /usr/include/x86_64-linux-gnu/bits/stat.h \
   /usr/include/x86_64-linux-gnu/bits/stdint-intn.h \
   /usr/include/x86_64-linux-gnu/bits/stdio_lim.h \
   /usr/include/x86_64-linux-gnu/bits/stdlib-float.h \
   /usr/include/x86_64-linux-gnu/bits/struct_mutex.h \
   /usr/include/x86_64-linux-gnu/bits/struct_rwlock.h \
+  /usr/include/x86_64-linux-gnu/bits/struct_stat.h \
+  /usr/include/x86_64-linux-gnu/bits/termios-baud.h \
+  /usr/include/x86_64-linux-gnu/bits/termios-c_cc.h \
+  /usr/include/x86_64-linux-gnu/bits/termios-c_cflag.h \
+  /usr/include/x86_64-linux-gnu/bits/termios-c_iflag.h \
+  /usr/include/x86_64-linux-gnu/bits/termios-c_lflag.h \
+  /usr/include/x86_64-linux-gnu/bits/termios-c_oflag.h \
+  /usr/include/x86_64-linux-gnu/bits/termios-misc.h \
+  /usr/include/x86_64-linux-gnu/bits/termios-struct.h \
+  /usr/include/x86_64-linux-gnu/bits/termios-tcflow.h \
+  /usr/include/x86_64-linux-gnu/bits/termios.h \
   /usr/include/x86_64-linux-gnu/bits/thread-shared-types.h \
   /usr/include/x86_64-linux-gnu/bits/time64.h \
   /usr/include/x86_64-linux-gnu/bits/timesize.h \
@@ -330,6 +347,7 @@ CMakeFiles/ascii_r.dir/main2.cpp.o: /media/bogdanel/uhhhhh/ascii-renderer/main2.
   /usr/include/x86_64-linux-gnu/bits/types/mbstate_t.h \
   /usr/include/x86_64-linux-gnu/bits/types/sigset_t.h \
   /usr/include/x86_64-linux-gnu/bits/types/struct_FILE.h \
+  /usr/include/x86_64-linux-gnu/bits/types/struct_iovec.h \
   /usr/include/x86_64-linux-gnu/bits/types/struct_timespec.h \
   /usr/include/x86_64-linux-gnu/bits/types/struct_timeval.h \
   /usr/include/x86_64-linux-gnu/bits/types/time_t.h \
@@ -351,6 +369,7 @@ CMakeFiles/ascii_r.dir/main2.cpp.o: /media/bogdanel/uhhhhh/ascii-renderer/main2.
   /usr/include/x86_64-linux-gnu/gnu/stubs.h \
   /usr/include/x86_64-linux-gnu/sys/cdefs.h \
   /usr/include/x86_64-linux-gnu/sys/select.h \
+  /usr/include/x86_64-linux-gnu/sys/ttydefaults.h \
   /usr/include/x86_64-linux-gnu/sys/types.h \
   /usr/lib/gcc/x86_64-linux-gnu/13/include/stdarg.h \
   /usr/lib/gcc/x86_64-linux-gnu/13/include/stddef.h
@@ -711,7 +730,25 @@ CMakeFiles/ascii_r.dir/renderer.cpp.o: /media/bogdanel/uhhhhh/ascii-renderer/ren
 
 /media/bogdanel/uhhhhh/ascii-renderer/perspectiverenderer.cpp:
 
+/usr/include/x86_64-linux-gnu/sys/ttydefaults.h:
+
 /usr/include/x86_64-linux-gnu/bits/unistd_ext.h:
+
+/usr/include/x86_64-linux-gnu/bits/types/struct_iovec.h:
+
+/usr/include/x86_64-linux-gnu/bits/termios.h:
+
+/usr/include/x86_64-linux-gnu/bits/termios-tcflow.h:
+
+/usr/include/x86_64-linux-gnu/bits/termios-misc.h:
+
+/usr/include/x86_64-linux-gnu/bits/termios-c_oflag.h:
+
+/usr/include/x86_64-linux-gnu/bits/termios-c_iflag.h:
+
+/usr/include/x86_64-linux-gnu/bits/termios-c_cc.h:
+
+/usr/include/x86_64-linux-gnu/bits/stat.h:
 
 /usr/include/x86_64-linux-gnu/bits/posix_opt.h:
 
@@ -719,7 +756,13 @@ CMakeFiles/ascii_r.dir/renderer.cpp.o: /media/bogdanel/uhhhhh/ascii-renderer/ren
 
 /usr/include/x86_64-linux-gnu/bits/getopt_core.h:
 
+/usr/include/termios.h:
+
+/usr/include/linux/falloc.h:
+
 /usr/include/linux/close_range.h:
+
+/usr/include/fcntl.h:
 
 /usr/lib/gcc/x86_64-linux-gnu/13/include/stdarg.h:
 
@@ -732,6 +775,8 @@ CMakeFiles/ascii_r.dir/renderer.cpp.o: /media/bogdanel/uhhhhh/ascii-renderer/ren
 /usr/include/x86_64-linux-gnu/sys/cdefs.h:
 
 /usr/include/x86_64-linux-gnu/gnu/stubs-64.h:
+
+/usr/include/x86_64-linux-gnu/bits/fcntl-linux.h:
 
 /usr/include/x86_64-linux-gnu/c++/13/bits/cpu_defines.h:
 
@@ -885,6 +930,8 @@ CMakeFiles/ascii_r.dir/renderer.cpp.o: /media/bogdanel/uhhhhh/ascii-renderer/ren
 
 /usr/include/c++/13/bits/stl_vector.h:
 
+/usr/include/x86_64-linux-gnu/bits/termios-c_lflag.h:
+
 /usr/include/c++/13/bits/concept_check.h:
 
 /usr/include/c++/13/bits/alloc_traits.h:
@@ -959,6 +1006,8 @@ CMakeFiles/ascii_r.dir/renderer.cpp.o: /media/bogdanel/uhhhhh/ascii-renderer/ren
 
 /usr/include/c++/13/tr1/exp_integral.tcc:
 
+/usr/include/x86_64-linux-gnu/bits/fcntl.h:
+
 /usr/include/c++/13/bits/utility.h:
 
 /usr/include/c++/13/bits/stl_function.h:
@@ -996,6 +1045,8 @@ CMakeFiles/ascii_r.dir/renderer.cpp.o: /media/bogdanel/uhhhhh/ascii-renderer/ren
 /media/bogdanel/uhhhhh/ascii-renderer/renderer.cpp:
 
 /usr/include/endian.h:
+
+/usr/include/x86_64-linux-gnu/bits/termios-struct.h:
 
 /usr/include/c++/13/string_view:
 
@@ -1051,7 +1102,11 @@ CMakeFiles/ascii_r.dir/renderer.cpp.o: /media/bogdanel/uhhhhh/ascii-renderer/ren
 
 /usr/include/x86_64-linux-gnu/bits/locale.h:
 
+/usr/include/x86_64-linux-gnu/bits/struct_stat.h:
+
 /usr/include/x86_64-linux-gnu/bits/select.h:
+
+/usr/include/x86_64-linux-gnu/bits/termios-c_cflag.h:
 
 /usr/include/c++/13/bits/hash_bytes.h:
 
@@ -1066,6 +1121,8 @@ CMakeFiles/ascii_r.dir/renderer.cpp.o: /media/bogdanel/uhhhhh/ascii-renderer/ren
 /usr/include/x86_64-linux-gnu/bits/mathcalls-narrow.h:
 
 /usr/include/x86_64-linux-gnu/bits/pthreadtypes.h:
+
+/usr/include/x86_64-linux-gnu/bits/termios-baud.h:
 
 /media/bogdanel/uhhhhh/ascii-renderer/main2.cpp:
 

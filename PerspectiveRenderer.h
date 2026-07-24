@@ -11,4 +11,6 @@ class PerspectiveRenderer : public Renderer {
 public:
   PerspectiveRenderer(int width, int height, vector<float> light_source,
                       int fov);
+  float camera_rot_y = 0.0f;
+  float camera_pivot[3];
 };

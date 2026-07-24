@@ -8,27 +8,38 @@ void PerspectiveRenderer::render() {
     }
   }
   // float scale  = 1.5;
+  float cy = cos(camera_rot_y);
+  float sy = sin(camera_rot_y);
   for (auto s : shapes)
     for (int i = 0; i < s->size; i++) {
-      if (s->points[i][2] <= 0.1f)
+      float px = s->points[i][0] - camera_pivot[0];
+      float pz = s->points[i][2] - camera_pivot[2];
+
+      float rot_x = px * cy + pz * sy;
+      float rot_z = -px * sy + pz * cy;
+
+      rot_x += camera_pivot[0];
+      rot_z += camera_pivot[2];
+
+      if (rot_z <= 0.1f)
         continue;
 
       float font_aspect_ratio = 2.0f;
       int screen_x =
-          (s->points[i][0] * fov * font_aspect_ratio) / s->points[i][2] +
-          (float)W_size / 2;
-      int screen_y =
-          (s->points[i][1] * fov * font_aspect_ratio) / s->points[i][2] +
-          (float)H_size / 2;
+          (rot_x * fov * font_aspect_ratio) / rot_z + (float)W_size / 2;
+      int screen_y = (s->points[i][1] * fov * font_aspect_ratio) / rot_z +
+                     (float)H_size / 2;
 
       if (screen_x < W_size && screen_x >= 0 && screen_y < H_size &&
           screen_y >= 0) {
-        if (s->points[i][2] < zbuf[screen_x][screen_y]) {
-          zbuf[screen_x][screen_y] = s->points[i][2];
-          float brightness_value = s->normals[i][0] * light_source[0] +
+        if (rot_z < zbuf[screen_x][screen_y]) {
+          zbuf[screen_x][screen_y] = rot_z;
+          float nx = s->normals[i][0] * cy + s->normals[i][2] * sy;
+          float nz = s->normals[i][0] * sy + s->normals[i][2] * cy;
+          float brightness_value = nx * light_source[0] +
                                    s->normals[i][1] * light_source[1] +
-                                   s->normals[i][2] * light_source[2];
-          brightness_value = brightness_value > 0 ? brightness_value : 0.10f;
+                                   nz * light_source[2];
+          brightness_value = brightness_value > 0 ? brightness_value : 0.50f;
           a[screen_x][screen_y] = brightness_value * (printvals_len - 1);
           color_mat[screen_x][screen_y] = s->colors[i];
         }
