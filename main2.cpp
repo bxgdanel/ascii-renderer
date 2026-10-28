@@ -25,6 +25,8 @@ int main() {
     c.R(-1);
     c.U(-1);
   }
+  for(int i=0;i<5;i++)
+    c.R();
 
   // for (int i = 0; i < 150; i++) {
   //  r.display();
