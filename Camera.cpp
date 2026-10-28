@@ -19,6 +19,7 @@ Ray Camera::get_ray(int x, int y, int W_size, int H_size) {
     pos[1] /= len;
     pos[2] /= len;
   }
+  rotate_z_by_angle(pos,rotation_angle);
   ray.direction[0] = pos[0];
   ray.direction[1] = pos[1];
   ray.direction[2] = pos[2];

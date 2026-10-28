@@ -21,8 +21,9 @@ protected:
   virtual void render();
 
 public:
-  Renderer(int width, int height, float light_source[3], Camera camera);
+  Renderer(int width, int height, float light_source[3], Camera& camera);
   Renderer() {}
   void display();
   void add_shape(const Surface *s);
+  Camera& getCamera() { return camera;}
 };

@@ -4,7 +4,7 @@
 #include <stdio.h>
 #include <unistd.h>
 using namespace std;
-Renderer::Renderer(int w, int h, float ls[3], Camera camera) {
+Renderer::Renderer(int w, int h, float ls[3], Camera& camera) {
   W_size = w;
   H_size = h;
   light_source[0] = ls[0];
